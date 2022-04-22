@@ -39,6 +39,10 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $category = $request->isMethod('put')? Category::findPrFail($request->id): new Category;
+        $category->id=$request->input('id');
+        $category->title=$request->input('title');
+        $category->description=$request->input('description');
     }
 
     /**
