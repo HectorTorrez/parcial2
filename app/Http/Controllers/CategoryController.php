@@ -43,6 +43,9 @@ class CategoryController extends Controller
         $category->id=$request->input('id');
         $category->title=$request->input('title');
         $category->description=$request->input('description');
+        if($category->save()){
+            
+        }
     }
 
     /**
@@ -54,6 +57,8 @@ class CategoryController extends Controller
     public function show($id)
     {
         //
+        $category = Category::findOrFail($id);
+        return new CategoryResource($category);
     }
 
     /**
@@ -88,5 +93,10 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+        $category = Category::finOrFail($id);
+
+        if($category->delete()){
+            return new CategoryResource();
+        }
     }
 }
